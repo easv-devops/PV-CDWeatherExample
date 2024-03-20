@@ -11,7 +11,7 @@ steps:
     commands:
       - exit 0
       - dotnet sonarscanner begin
-          /k:"easv-devops_CDWeatherExample_AY4d5zUxEVvRW2O60EXK"
+          /k:"easv-devops_PV-CDWeatherExample_AY5aySSYEVvRW2O60EYb"
           /d:sonar.host.url="http://sonar.setgo.dk:9000"  
           /d:sonar.token="$SONARSECRET"
           /d:sonar.cs.vscoveragexml.reportsPaths=coverage.xml
@@ -58,7 +58,7 @@ steps:
   - name: trigger update
     image: curlimages/curl
     commands:
-      - "curl --fail -X GET 'http://84.247.167.129:8080/v1/update' -H 'Authorization: Bearer mytoken'" # Must match the token defined in docker-compose.yml
+      - "curl --fail -X GET 'http://4.236.188.65:8080/v1/update' -H 'Authorization: Bearer mytoken'" # Must match the token defined in docker-compose.yml
       - sleep 10
     depends_on:
       - publish api
@@ -68,7 +68,7 @@ steps:
     image: flyway/flyway
     commands:
       - flyway migrate
-          -url=jdbc:mariadb://84.247.167.129:3306/forecasts
+          -url=jdbc:mariadb://4.236.188.65:3306/forecasts
           -user=myuser
           -password=mypassword
           -locations=filesystem:./db/sql
